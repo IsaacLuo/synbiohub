@@ -1,0 +1,46 @@
+service SynBioHubJava {
+    rpc ChangeURIPrefix (ChangeURIPrefixRequest) returns (ChangeURIPrefixReply);
+    rpc BuildCOMBINEArchive (BuildCOMBINEArchiveRequest) returns (BuildCOMBINEArchiveReply);
+    rpc ConvertToGenBank (ConvertToGenBankRequest) returns (ConvertToGenBankReply);
+    rpc CloneSubmission (CloneSubmissionRequest) returns (CloneSubmissionReply);
+    rpc PrepareSnapshot (PrepareSnapshotRequest) returns (PrepareSnapshotReply);
+    rpc PrepareSubmission (PrepareSubmissionRequest) returns (PrepareSubmissionReply);
+    rpc RDFToSBOL (RDFToSBOLRequest) returns (RDFToSBOLReply);
+}
+
+message ChangeURIPrefixRequest {
+    string sbolFilename = 1;
+    string uriPrefix = 2;
+    bool   requireComplete = 3;
+    bool   requireCompliant = 4;
+    bool   enforceBestPractices = 5;
+    bool   typesInUri = 6;
+    bool   keepGoing = 7;
+    string version = 8;
+    string topLevelUri = 9;
+}
+
+message ChangeURIPrefixReply {
+    int32  jobId = 1;
+    bool   success = 2;
+    string resultFilename = 3;
+    string log = 4;
+    string errorLog = 5;
+}
+
+message BuildCOMBINEArchiveRequest {
+    string sbolFilename = 1;
+    repeated map<string, string> creatorInfo = 2;
+}
+
+message BuildCOMBINEArchiveReply {
+    int32  jobId = 1;
+    bool   success = 2;
+    string resultFilename = 3;
+    string errorLog = 5;
+}
+
+message ConvertToGenBankRequest {}
+message ConvertToGenBankReply {}
+
+message {

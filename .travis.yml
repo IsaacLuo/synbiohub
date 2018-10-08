@@ -3,11 +3,6 @@ sudo: required
 services:
     - docker
 
-script:
-    - if [ "$TRAVIS_BRANCH" == "master" ]; then
-      docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD";
-      docker build -t synbiohub/synbiohub:snapshot -f docker/Dockerfile .;
-      docker build -t synbiohub/synbiohub:snapshot-standalone -f docker/Dockerfile-standalone .;
-      docker push synbiohub/synbiohub:snapshot;
-      docker push synbiohub/synbiohub:snapshot-standalone;
-      fi
+install: docker/build.sh
+script: tests/SBOLTestRunner.sh
+after_success: docker/push.sh
